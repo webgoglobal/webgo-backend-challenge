@@ -1,0 +1,215 @@
+### ══════════════════════════════════════════════════
+### WebGo Backend Challenge — Test Requests
+### ══════════════════════════════════════════════════
+###
+### Usar con la extensión "REST Client" de VS Code:
+###   https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+###
+### Prerrequisitos:
+###   1. npm run dev   (inicia emuladores — terminal 1)
+###   2. npm run seed  (carga datos de prueba — terminal 2)
+###
+### ══════════════════════════════════════════════════
+
+@baseUrl = http://127.0.0.1:5001/demo-webgo-challenge/us-central1
+@siteId = site456
+@userId = user123
+
+
+### ─────────────────────────────────────────────────
+### 1. Crear cupón de porcentaje (createCoupon)
+### ─────────────────────────────────────────────────
+
+POST {{baseUrl}}/createCoupon
+Content-Type: application/json
+
+{
+  "data": {
+    "siteId": "{{siteId}}",
+    "code": "verano2026",
+    "discountType": "percentage",
+    "discountValue": 15,
+    "maxUses": 50,
+    "minPurchase": 10000,
+    "validFrom": "2026-01-01T00:00:00-03:00",
+    "validUntil": "2026-12-31T23:59:59-03:00"
+  }
+}
+
+### ─────────────────────────────────────────────────
+### 2. Crear cupón de monto fijo (createCoupon)
+### ─────────────────────────────────────────────────
+
+POST {{baseUrl}}/createCoupon
+Content-Type: application/json
+
+{
+  "data": {
+    "siteId": "{{siteId}}",
+    "code": "DESCUENTO5K",
+    "discountType": "fixed",
+    "discountValue": 5000,
+    "maxUses": 20,
+    "minPurchase": 20000,
+    "validFrom": "2026-01-01T00:00:00-03:00",
+    "validUntil": "2026-12-31T23:59:59-03:00"
+  }
+}
+
+### ─────────────────────────────────────────────────
+### 3. Listar cupones (getCoupons)
+### ─────────────────────────────────────────────────
+
+POST {{baseUrl}}/getCoupons
+Content-Type: application/json
+
+{
+  "data": {
+    "siteId": "{{siteId}}"
+  }
+}
+
+### ─────────────────────────────────────────────────
+### 4. Actualizar cupón (updateCoupon)
+### ─────────────────────────────────────────────────
+
+POST {{baseUrl}}/updateCoupon
+Content-Type: application/json
+
+{
+  "data": {
+    "siteId": "{{siteId}}",
+    "couponId": "coupon001",
+    "discountValue": 20,
+    "maxUses": 200,
+    "isActive": true
+  }
+}
+
+### ─────────────────────────────────────────────────
+### 5. Validar cupón (validateCoupon)
+### ─────────────────────────────────────────────────
+
+POST {{baseUrl}}/validateCoupon
+Content-Type: application/json
+
+{
+  "data": {
+    "siteId": "{{siteId}}",
+    "code": "BIENVENIDO",
+    "cartTotal": 59990
+  }
+}
+
+### ─────────────────────────────────────────────────
+### 6. Validar otro cupón (validateCoupon)
+### ─────────────────────────────────────────────────
+
+POST {{baseUrl}}/validateCoupon
+Content-Type: application/json
+
+{
+  "data": {
+    "siteId": "{{siteId}}",
+    "code": "NOEXISTE",
+    "cartTotal": 30000
+  }
+}
+
+### ─────────────────────────────────────────────────
+### 7. Validar cupón variante (validateCoupon)
+### ─────────────────────────────────────────────────
+
+POST {{baseUrl}}/validateCoupon
+Content-Type: application/json
+
+{
+  "data": {
+    "siteId": "{{siteId}}",
+    "code": "BIENVENIDO",
+    "cartTotal": 25000
+  }
+}
+
+### ─────────────────────────────────────────────────
+### 8. Aplicar cupón (applyCoupon)
+### ─────────────────────────────────────────────────
+
+POST {{baseUrl}}/applyCoupon
+Content-Type: application/json
+
+{
+  "data": {
+    "siteId": "{{siteId}}",
+    "couponId": "coupon001",
+    "orderId": "order-test-001"
+  }
+}
+
+### ─────────────────────────────────────────────────
+### 9. Eliminar cupón (deleteCoupon)
+### ─────────────────────────────────────────────────
+
+POST {{baseUrl}}/deleteCoupon
+Content-Type: application/json
+
+{
+  "data": {
+    "siteId": "{{siteId}}",
+    "couponId": "coupon001"
+  }
+}
+
+### ─────────────────────────────────────────────────
+### 10. Crear otro cupón (createCoupon)
+### ─────────────────────────────────────────────────
+
+POST {{baseUrl}}/createCoupon
+Content-Type: application/json
+
+{
+  "data": {
+    "siteId": "{{siteId}}",
+    "code": "INVIERNO50",
+    "discountType": "percentage",
+    "discountValue": 50,
+    "validFrom": "2026-01-01T00:00:00-03:00",
+    "validUntil": "2026-12-31T23:59:59-03:00"
+  }
+}
+
+### ─────────────────────────────────────────────────
+### 11. Crear cupón variante A (createCoupon)
+### ─────────────────────────────────────────────────
+
+POST {{baseUrl}}/createCoupon
+Content-Type: application/json
+
+{
+  "data": {
+    "siteId": "{{siteId}}",
+    "code": "PRIMAVERA10",
+    "discountType": "percentage",
+    "discountValue": 10,
+    "validFrom": "2026-01-01T00:00:00",
+    "validUntil": "2026-12-31T23:59:59"
+  }
+}
+
+### ─────────────────────────────────────────────────
+### 12. Crear cupón variante B (createCoupon)
+### ─────────────────────────────────────────────────
+
+POST {{baseUrl}}/createCoupon
+Content-Type: application/json
+
+{
+  "data": {
+    "siteId": "{{siteId}}",
+    "code": "MEGADESC",
+    "discountType": "percentage",
+    "discountValue": 150,
+    "validFrom": "2026-01-01T00:00:00-03:00",
+    "validUntil": "2026-12-31T23:59:59-03:00"
+  }
+}

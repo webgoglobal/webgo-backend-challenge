@@ -1,0 +1,17 @@
+node_modules/
+dist/
+*.js
+*.js.map
+*.d.ts
+!seed.ts
+firebase-debug.log
+firebase-debug.*.log
+ui-debug.log
+*.local
+.firebase/
+
+emulator.log
+seed-output.txt
+
+# Internal docs (evaluation rubrics, reference solutions)
+docs/

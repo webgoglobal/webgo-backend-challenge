@@ -1,0 +1,26 @@
+{
+  "name": "webgo-backend-challenge",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "dev": "npx firebase emulators:start --only firestore,functions,auth --project demo-webgo-challenge",
+    "seed": "npx tsx seed.ts",
+    "test": "echo \"Escribe tus tests aquí\" && exit 0"
+  },
+  "dependencies": {
+    "firebase-admin": "^13.6.1",
+    "firebase-functions": "^7.0.5",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "firebase-tools": "^15.6.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}
